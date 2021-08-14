@@ -90,11 +90,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.UserSelection.addWidget(self.clearButton)
 
         #create navigation toolbar
-        toolbar = NavigationToolbar(self.cs, self)
+        self.toolbar = NavigationToolbar(self.cs, self)
 
         #create layout and add in the toolbar, user inputs, and canvas
         self.layout = QVBoxLayout(self)
-        self.layout.addWidget(toolbar)
+        self.layout.addWidget(self.toolbar)
         self.layout.addLayout(self.UserSelection)
         self.layout.addWidget(self.cs)
 
@@ -130,6 +130,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.cs.altitude.set(xlabel='Time (ms)', ylabel='Alitude (m)', title='Altitude vs Time')
         self.cs.altitude.plot(data[0], data[2])
 
+        self.toolbar.update()
+
         self.cs.draw()
 
     def clearCanvas(self):
@@ -137,6 +139,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.cs.altitude.cla()
         self.cs.descentRate.set(xlabel='Time (ms)', ylabel='Descent Rate (m/s)', title='Descent Rate vs Time')
         self.cs.altitude.set(xlabel='Time (ms)', ylabel='Alitude (m)', title='Altitude vs Time')
+
+        self.toolbar.update()
 
         self.cs.draw()
 
